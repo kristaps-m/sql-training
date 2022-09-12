@@ -11,19 +11,54 @@ import {
 } from "../src/table-names";
 import { tableInfo, indexList } from "../src/queries/table-info";
 
-const CREATE_MOVIES_TABLE = ``;
-
-const CREATE_MOVIE_RATINGS_TABLE = ``;
-
-const CREATE_ACTORS_TABLE = ``;
-
-const CREATE_KEYWORDS_TABLE = ``;
-
-const CREATE_DIRECTORS_TABLE = ``;
-
-const CREATE_GENRES_TABLE = ``;
-
-const CREATE_PRODUCTION_COMPANIES_TABLE = ``;
+const CREATE_MOVIES_TABLE = `Create Table ${MOVIES} (
+  id integer NOT NULL Primary key,
+  imdb_id text NOT NULL,
+  popularity real NOT NULL,
+  budget real NOT NULL,
+  budget_adjusted real NOT NULL,
+  revenue real NOT NULL,
+  revenue_adjusted real NOT NULL,
+  original_title text NOT NULL,
+  homepage text,
+  tagline text,
+  overview text NOT NULL,
+  runtime integer NOT NULL,
+  release_date text NOT NULL
+)`;
+ 
+const CREATE_MOVIE_RATINGS_TABLE = `Create Table ${MOVIE_RATINGS} (
+  user_id integer NOT NULL,
+  movie_id integer NOT NULL,
+  rating real NOT NULL,
+  time_created text NOT NULL,
+  Primary key(user_id, movie_id)
+  )`;
+ 
+const CREATE_ACTORS_TABLE = `create table ${ACTORS} (
+  id integer Primary key NOT NULL,
+  full_name text NOT NULL
+)`;
+ 
+const CREATE_KEYWORDS_TABLE = `create table ${KEYWORDS} (
+  id integer Primary key NOT NULL,
+  keyword text NOT NULL
+)`;
+ 
+const CREATE_DIRECTORS_TABLE = `create table ${DIRECTORS} (
+  id integer Primary key NOT NULL,
+  full_name text NOT NULL
+)`;
+ 
+const CREATE_GENRES_TABLE = `create table ${GENRES} (
+  id integer Primary key NOT NULL,
+  genre text NOT NULL
+)`;
+ 
+const CREATE_PRODUCTION_COMPANIES_TABLE = `create table ${PRODUCTION_COMPANIES} (
+  id integer Primary key NOT NULL,
+  company_name text NOT NULL
+)`;
 
 const CREATE_INDEX_MOVIES_RELEASE_DATE = ``;
 
