@@ -10,6 +10,7 @@ describe("Queries Across Tables", () => {
   }, minutes(3));
 
   // create new table with movies bodget :)
+  // select movies, join movie directiors, join directors
 
   it(
     "should select top three directors ordered by total budget spent in their movies",
