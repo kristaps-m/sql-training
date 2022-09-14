@@ -1,17 +1,30 @@
-import _ from "lodash";
+import _, { escape } from "lodash";
 import { Database } from "../src/database";
 import { CsvLoader } from "../src/data/csv-loader";
 import {
   selectCount,
   selectRatingsByUserID,
-  selectMovieId
+  selectMovieId,
 } from "../src/queries/select";
-import { MOVIE_RATINGS } from "../src/table-names";
+import { MOVIES, MOVIE_RATINGS } from "../src/table-names";
 import { Rating } from "../src/data/types";
 import { minutes } from "./utils";
 
 const insertRatings = (movieId: number, ratings: Rating[]) => {
-  throw new Error(`todo`);
+  //console.log(movieId); // return number like 2709
+  return (
+    `INSERT INTO ${MOVIE_RATINGS} (user_id, movie_id, rating, time_created) VALUES` +
+    ratings
+      .map(
+        (rating) => `(
+     '${rating.userId}',
+     '${movieId}',
+     '${rating.rating}',
+     '${rating.time_created}'
+     )`
+      )
+      
+  );
 };
 
 describe("Insert Combined Data", () => {
@@ -24,7 +37,7 @@ describe("Insert Combined Data", () => {
 
   it(
     "should insert movie ratings",
-    async done => {
+    async (done) => {
       const ratingsByImdbId = _.groupBy(await CsvLoader.ratings(), "imdbId");
 
       for (const imdbId of Object.keys(ratingsByImdbId)) {

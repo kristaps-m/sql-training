@@ -1,8 +1,16 @@
-import { ACTORS, DIRECTORS, GENRES, KEYWORDS, MOVIES, MOVIE_RATINGS, PRODUCTION_COMPANIES } from "../table-names";
+import {
+  ACTORS,
+  DIRECTORS,
+  GENRES,
+  KEYWORDS,
+  MOVIES,
+  MOVIE_RATINGS,
+  PRODUCTION_COMPANIES,
+} from "../table-names";
 
 export const selectActorByName = (fullName: string): string => {
-  return (`select full_name from ${ACTORS}
-  where full_name = '${fullName}'`);
+  return `select full_name from ${ACTORS}
+  where full_name = '${fullName}'`;
 };
 
 export const selectKeyword = (keyword: string): string => {
@@ -66,7 +74,7 @@ export const selectMovieId = (imdbId: string): string => {
 };
 
 export const selectRatingsByUserID = (userId: number): string => {
-  return `SELECT user_id FROM ${MOVIE_RATINGS}
+  return `SELECT * FROM ${MOVIE_RATINGS}
   WHERE user_id = '${userId}'`;
 };
 
