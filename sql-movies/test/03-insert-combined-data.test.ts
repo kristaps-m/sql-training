@@ -14,16 +14,14 @@ const insertRatings = (movieId: number, ratings: Rating[]) => {
   //console.log(movieId); // return number like 2709
   return (
     `INSERT INTO ${MOVIE_RATINGS} (user_id, movie_id, rating, time_created) VALUES` +
-    ratings
-      .map(
-        (rating) => `(
+    ratings.map(
+      (rating) => `(
      '${rating.userId}',
      '${movieId}',
      '${rating.rating}',
      '${rating.time_created}'
      )`
-      )
-      
+    )
   );
 };
 

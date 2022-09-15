@@ -12,52 +12,52 @@ import {
 import { tableInfo, indexList } from "../src/queries/table-info";
 
 const CREATE_MOVIES_TABLE = `Create Table ${MOVIES} (
-  id integer NOT NULL Primary key,
-  imdb_id text NOT NULL,
-  popularity real NOT NULL,
-  budget real NOT NULL,
-  budget_adjusted real NOT NULL,
-  revenue real NOT NULL,
-  revenue_adjusted real NOT NULL,
-  original_title text NOT NULL,
-  homepage text,
-  tagline text,
-  overview text NOT NULL,
-  runtime integer NOT NULL,
-  release_date text NOT NULL
+  id INTEGER NOT NULL Primary key,
+  imdb_id TEXT NOT NULL,
+  popularity REAL NOT NULL,
+  budget REAL NOT NULL,
+  budget_adjusted REAL NOT NULL,
+  revenue REAL NOT NULL,
+  revenue_adjusted REAL NOT NULL,
+  original_title TEXT NOT NULL,
+  homepage TEXT,
+  tagline TEXT,
+  overview TEXT NOT NULL,
+  runtime INTEGER NOT NULL,
+  release_date TEXT NOT NULL
 )`;
 
 const CREATE_MOVIE_RATINGS_TABLE = `Create Table ${MOVIE_RATINGS} (
-  user_id integer NOT NULL,
-  movie_id integer NOT NULL,
-  rating real NOT NULL,
-  time_created text NOT NULL,
+  user_id INTEGER NOT NULL,
+  movie_id INTEGER NOT NULL,
+  rating REAL NOT NULL,
+  time_created TEXT NOT NULL,
   Primary key(user_id, movie_id)
   )`;
 
 const CREATE_ACTORS_TABLE = `create table ${ACTORS} (
-  id integer Primary key NOT NULL,
-  full_name text NOT NULL
+  id INTEGER Primary key NOT NULL,
+  full_name TEXT NOT NULL
 )`;
 
 const CREATE_KEYWORDS_TABLE = `create table ${KEYWORDS} (
-  id integer Primary key NOT NULL,
-  keyword text NOT NULL
+  id INTEGER Primary key NOT NULL,
+  keyword TEXT NOT NULL
 )`;
 
 const CREATE_DIRECTORS_TABLE = `create table ${DIRECTORS} (
-  id integer Primary key NOT NULL,
-  full_name text NOT NULL
+  id INTEGER Primary key NOT NULL,
+  full_name TEXT NOT NULL
 )`;
 
 const CREATE_GENRES_TABLE = `create table ${GENRES} (
-  id integer Primary key NOT NULL,
-  genre text NOT NULL
+  id INTEGER Primary key NOT NULL,
+  genre TEXT NOT NULL
 )`;
 
 const CREATE_PRODUCTION_COMPANIES_TABLE = `create table ${PRODUCTION_COMPANIES} (
-  id integer Primary key NOT NULL,
-  company_name text NOT NULL
+  id INTEGER Primary key NOT NULL,
+  company_name TEXT NOT NULL
 )`;
 
 // i start to write
@@ -129,59 +129,59 @@ describe("Tables", () => {
 
     const movies = (await selectTableInfo(MOVIES)).map(mapFn);
     expect(movies).toEqual([
-      { name: "id", type: "integer" },
-      { name: "imdb_id", type: "text" },
-      { name: "popularity", type: "real" },
-      { name: "budget", type: "real" },
-      { name: "budget_adjusted", type: "real" },
-      { name: "revenue", type: "real" },
-      { name: "revenue_adjusted", type: "real" },
-      { name: "original_title", type: "text" },
-      { name: "homepage", type: "text" },
-      { name: "tagline", type: "text" },
-      { name: "overview", type: "text" },
-      { name: "runtime", type: "integer" },
-      { name: "release_date", type: "text" },
+      { name: "id", type: "INTEGER" },
+      { name: "imdb_id", type: "TEXT" },
+      { name: "popularity", type: "REAL" },
+      { name: "budget", type: "REAL" },
+      { name: "budget_adjusted", type: "REAL" },
+      { name: "revenue", type: "REAL" },
+      { name: "revenue_adjusted", type: "REAL" },
+      { name: "original_title", type: "TEXT" },
+      { name: "homepage", type: "TEXT" },
+      { name: "tagline", type: "TEXT" },
+      { name: "overview", type: "TEXT" },
+      { name: "runtime", type: "INTEGER" },
+      { name: "release_date", type: "TEXT" },
     ]);
 
     const movieRatings = (await selectTableInfo(MOVIE_RATINGS)).map(mapFn);
     expect(movieRatings).toEqual([
-      { name: "user_id", type: "integer" },
-      { name: "movie_id", type: "integer" },
-      { name: "rating", type: "real" },
-      { name: "time_created", type: "text" },
+      { name: "user_id", type: "INTEGER" },
+      { name: "movie_id", type: "INTEGER" },
+      { name: "rating", type: "REAL" },
+      { name: "time_created", type: "TEXT" },
     ]);
 
     const actors = (await selectTableInfo(ACTORS)).map(mapFn);
     expect(actors).toEqual([
-      { name: "id", type: "integer" },
-      { name: "full_name", type: "text" },
+      { name: "id", type: "INTEGER" },
+      { name: "full_name", type: "TEXT" },
     ]);
 
     const keywords = (await selectTableInfo(KEYWORDS)).map(mapFn);
     expect(keywords).toEqual([
-      { name: "id", type: "integer" },
-      { name: "keyword", type: "text" },
+      { name: "id", type: "INTEGER" },
+      { name: "keyword", type: "TEXT" },
     ]);
 
     const directors = (await selectTableInfo(DIRECTORS)).map(mapFn);
     expect(directors).toEqual([
-      { name: "id", type: "integer" },
-      { name: "full_name", type: "text" },
+      { name: "id", type: "INTEGER" },
+      { name: "full_name", type: "TEXT" },
     ]);
 
     const genres = (await selectTableInfo(GENRES)).map(mapFn);
     expect(genres).toEqual([
-      { name: "id", type: "integer" },
-      { name: "genre", type: "text" },
+      { name: "id", type: "INTEGER" },
+      { name: "genre", type: "TEXT" },
     ]);
 
     const productionCompanies = (await selectTableInfo(
       PRODUCTION_COMPANIES
     )).map(mapFn);
     expect(productionCompanies).toEqual([
-      { name: "id", type: "integer" },
-      { name: "company_name", type: "text" },
+      { name: "id", type: "INTEGER" },
+      { name: "company_name", type: "TEXT" },
     ]);
 
     done();

@@ -9,62 +9,63 @@ import {
 } from "../table-names";
 
 export const selectActorByName = (fullName: string): string => {
-  return `select full_name from ${ACTORS}
+  return `select * from ${ACTORS}
   where full_name = '${fullName}'`;
 };
 
 export const selectKeyword = (keyword: string): string => {
-  return `SELECT keyword FROM ${KEYWORDS}
+  return `SELECT * FROM ${KEYWORDS}
   WHERE keyword = '${keyword}'`;
 };
 
 export const selectDirector = (director: string): string => {
-  return `SELECT full_name FROM ${DIRECTORS}
+  return `SELECT * FROM ${DIRECTORS}
   WHERE full_name = '${director}'`;
 };
 
 export const selectGenre = (genre: string): string => {
-  return `SELECT genre FROM ${GENRES}
+  return `SELECT * FROM ${GENRES}
   WHERE genre = '${genre}'`;
 };
 
 export const selectProductionCompany = (company: string): string => {
-  return `SELECT company_name FROM ${PRODUCTION_COMPANIES}
+  return `SELECT * FROM ${PRODUCTION_COMPANIES}
   WHERE company_name = '${company}'`;
 };
 
 export const selectMovieById = (id: number): string => {
-  return `SELECT id FROM ${MOVIES}
+  return `SELECT * FROM ${MOVIES}
   WHERE id = '${id}'`;
 };
 
 export const selectGenreById = (id: number): string => {
-  return `SELECT id FROM ${GENRES}
+  return `SELECT * FROM ${GENRES}
   WHERE id = '${id}'`;
 };
 
 export const selectDirectorById = (id: number): string => {
-  return `SELECT id FROM ${DIRECTORS}
+  return `SELECT * FROM ${DIRECTORS}
   WHERE id = '${id}'`;
 };
 
 export const selectActorById = (id: number): string => {
-  return `SELECT id FROM ${ACTORS}
+  return `SELECT * FROM ${ACTORS}
   WHERE id = '${id}'`;
 };
 
 export const selectKeywordById = (id: number): string => {
-  return `SELECT id FROM ${KEYWORDS}
+  return `SELECT * FROM ${KEYWORDS}
   WHERE id = '${id}'`;
 };
 
 export const selectProductionCompanyById = (id: number): string => {
-  return `SELECT id FROM ${PRODUCTION_COMPANIES}
+  return `SELECT * FROM ${PRODUCTION_COMPANIES}
   WHERE id = '${id}'`;
 };
 
+// original_title
 export const selectMovie = (imdbId: string): string => {
-  return `SELECT original_title FROM ${MOVIES}
+  return `SELECT * FROM ${MOVIES}
   WHERE imdb_id = '${imdbId}'`;
 };
 

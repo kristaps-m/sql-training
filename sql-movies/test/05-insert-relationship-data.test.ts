@@ -29,62 +29,96 @@ import {
   ProductionCompanyRow,
 } from "../src/types";
 
-// movieId, genres, genreRows
+// https://sqlzoo.net/wiki/CREATE_a_foreign_key
+// movieId, genres, genreRows, // ir funkcija FILTER !! array!
 const insertMovieGenres = (
   movieId: number,
   genres: string[],
   genreRows: GenreRow[]
 ): string => {
+  //console.log(movieId, genres[0], genreRows[0], "<--------- 3");
+  //genres.filter(genre => genreRows.find(g => g.genre = genre) != undefined)
+
+  const filterGendres = genreRows.filter(
+    (genre) => genres.indexOf(genre.genre) != -1
+  );
+
+  // const filterGendres = genres.filter(
+  //   (X) => genreRows.indexOf() != -1
+  // );
+  //console.log(filterGendres[0]);
+  // console.log(
+  //   `INSERT INTO ${MOVIE_GENRES} (movie_id, genre_id) VALUES` +
+  //     filterGendres.map((genre) => `('${movieId}', '${genre.id}')`).join(",")
+  // );
+
   return (
     `INSERT INTO ${MOVIE_GENRES} (movie_id, genre_id) VALUES` +
-    genres.map((genre) => `('${genre}')`).join(",")
+    filterGendres.map((genre) => `("${movieId}", "${genre.id}")`).join(",")
   );
 };
 // in test nr04 i will have to add foren keys?
+//genres.map((genre) => `('${genre}')`).join(",")
+
+//------------------------------------------------------------------------------------------------------------
 const insertMovieActors = (
   movieId: number,
   actors: string[],
   actorRows: ActorRow[]
 ): string => {
+  const filterActors = actorRows.filter(
+    (actor) => actors.indexOf(actor.full_name) != -1
+  );
   return (
     `INSERT INTO ${MOVIE_ACTORS} (movie_id, actor_id) VALUES` +
-    actors.map((actor) => `('${actor}')`).join(",")
+    filterActors.map((actor) => `("${movieId}", "${actor.id}")`).join(",")
   );
 };
-
+//------------------------------------------------------------------------------------------------------------
 const insertMovieDirectors = (
   movieId: number,
   directors: string[],
   directorRows: DirectorRow[]
 ): string => {
+  const filterDirectors = directorRows.filter(
+    (d) => directors.indexOf(d.full_name) != -1
+  );
   return (
     `INSERT INTO ${MOVIE_DIRECTORS} (movie_id, director_id) VALUES` +
-    directors.map((director) => `('${director}')`).join(",")
+    filterDirectors
+      .map((director) => `("${movieId}","${director.id}")`)
+      .join(",")
   );
 };
-
+//------------------------------------------------------------------------------------------------------------
 const insertMovieKeywords = (
   movieId: number,
   keywords: string[],
   keywordRows: KeywordRow[]
 ): string => {
+  const filterDirectors = keywordRows.filter(
+    (k) => keywords.indexOf(k.keyword) != -1
+  );
   return (
     `INSERT INTO ${MOVIE_KEYWORDS} (movie_id, keyword_id) VALUES` +
-    keywords.map((keyword) => `('${keyword}')`).join(",")
+    filterDirectors.map((keyword) => `("${movieId}","${keyword.id}")`).join(",")
   );
 };
-
+//------------------------------------------------------------------------------------------------------------
 const insertMovieProductionCompanies = (
   movieId: number,
   productionCompanies: string[],
   productionCompanyRows: ProductionCompanyRow[]
 ): string => {
+  const filterProdComp = productionCompanyRows.filter(
+    (pc) => productionCompanies.indexOf(pc.company_name) != -1
+  );
   return (
     `INSERT INTO ${MOVIE_PRODUCTION_COMPANIES} (movie_id, company_id) VALUES` +
-    productionCompanies.map((PC) => `('${PC}')`).join(",")
+    filterProdComp.map((PC) => `("${movieId}","${PC.id}")`).join(",")
   );
 };
-
+//------------------------------------------------------------------------------------------------------------
 describe("Insert Relationship Data", () => {
   let db: Database;
 
