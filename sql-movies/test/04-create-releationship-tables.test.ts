@@ -10,7 +10,6 @@ import { Database } from "../src/database";
 import { tableInfo } from "../src/queries/table-info";
 import { minutes, Log } from "./utils";
 
-// https://sqlzoo.net/wiki/CREATE_a_foreign_key
 const CREATE_MOVIE_GENRES_TABLE = `CREATE TABLE ${MOVIE_GENRES}
 (movie_id INTEGER NOT NULL, genre_id INTEGER NOT NULL,
   Primary key(movie_id, genre_id),

@@ -60,11 +60,6 @@ const CREATE_PRODUCTION_COMPANIES_TABLE = `create table ${PRODUCTION_COMPANIES} 
   company_name TEXT NOT NULL
 )`;
 
-// i start to write
-/*
-CREATE [UNIQUE] INDEX index_name 
-ON table_name(column_list);
-*/
 const CREATE_INDEX_MOVIES_RELEASE_DATE = `CREATE INDEX movies_release_date_idx
 ON ${MOVIES}(release_date)`;
 
