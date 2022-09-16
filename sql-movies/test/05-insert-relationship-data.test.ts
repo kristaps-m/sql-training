@@ -9,6 +9,9 @@ import {
   MOVIE_PRODUCTION_COMPANIES,
   GENRES,
   PRODUCTION_COMPANIES,
+  KEYWORDS,
+  DIRECTORS,
+  ACTORS,
 } from "../src/table-names";
 import {
   selectCount,
@@ -49,7 +52,7 @@ const insertMovieGenres = (
   //console.log(filterGendres[0]);
   // console.log(
   //   `INSERT INTO ${MOVIE_GENRES} (movie_id, genre_id) VALUES` +
-  //     filterGendres.map((genre) => `('${movieId}', '${genre.id}')`).join(",")
+  //   filterGendres.map((genre) => `("${movieId}", "${genre.id}")`).join(",")
   // );
 
   return (
@@ -69,6 +72,8 @@ const insertMovieActors = (
   const filterActors = actorRows.filter(
     (actor) => actors.indexOf(actor.full_name) != -1
   );
+  // console.log(`INSERT INTO ${MOVIE_ACTORS} (movie_id, actor_id) VALUES` +
+  // filterActors.map((actor) => `("${movieId}", "${actor.id}")`).join(","))
   return (
     `INSERT INTO ${MOVIE_ACTORS} (movie_id, actor_id) VALUES` +
     filterActors.map((actor) => `("${movieId}", "${actor.id}")`).join(",")
@@ -83,6 +88,10 @@ const insertMovieDirectors = (
   const filterDirectors = directorRows.filter(
     (d) => directors.indexOf(d.full_name) != -1
   );
+  // console.log(`INSERT INTO ${MOVIE_DIRECTORS} (movie_id, director_id) VALUES` +
+  // filterDirectors
+  //   .map((director) => `("${movieId}","${director.id}")`)
+  //   .join(","));
   return (
     `INSERT INTO ${MOVIE_DIRECTORS} (movie_id, director_id) VALUES` +
     filterDirectors
@@ -96,12 +105,14 @@ const insertMovieKeywords = (
   keywords: string[],
   keywordRows: KeywordRow[]
 ): string => {
-  const filterDirectors = keywordRows.filter(
+  const filterKeywords = keywordRows.filter(
     (k) => keywords.indexOf(k.keyword) != -1
   );
+  // console.log(`INSERT INTO ${MOVIE_KEYWORDS} (movie_id, keyword_id) VALUES` +
+  // filterKeywords.map((keyword) => `("${movieId}","${keyword.id}")`).join(","));
   return (
     `INSERT INTO ${MOVIE_KEYWORDS} (movie_id, keyword_id) VALUES` +
-    filterDirectors.map((keyword) => `("${movieId}","${keyword.id}")`).join(",")
+    filterKeywords.map((keyword) => `("${movieId}","${keyword.id}")`).join(",")
   );
 };
 //------------------------------------------------------------------------------------------------------------
@@ -170,7 +181,7 @@ describe("Insert Relationship Data", () => {
     async (done) => {
       const movies = await CsvLoader.movies();
       const actorRows = (await db.selectMultipleRows(
-        `SELECT * FROM ${MOVIE_ACTORS}`
+        `SELECT * FROM ${ACTORS}`
       )) as ActorRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
@@ -210,7 +221,7 @@ describe("Insert Relationship Data", () => {
     async (done) => {
       const movies = await CsvLoader.movies();
       const directorRows = (await db.selectMultipleRows(
-        `SELECT * FROM ${MOVIE_DIRECTORS}`
+        `SELECT * FROM ${DIRECTORS}`
       )) as DirectorRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
@@ -246,7 +257,7 @@ describe("Insert Relationship Data", () => {
     async (done) => {
       const movies = await CsvLoader.movies();
       const keywordRows = (await db.selectMultipleRows(
-        `SELECT * FROM ${MOVIE_KEYWORDS}`
+        `SELECT * FROM ${KEYWORDS}`
       )) as KeywordRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
