@@ -34,7 +34,8 @@ const pricingPlansDir = resolve(__dirname, "../_data/pricing_plans.csv");
 
 const insertApps = (apps: App[]) => {
   return (
-    `insert into ${APPS} (title) values` +
+    `insert into ${APPS} (url,title,tagline,developer,developer_link,icon,
+      rating,reviews_count,description,pricing_hint) values` +
     apps
       .map(
         (app) => `('${app.url}',
@@ -61,7 +62,7 @@ const insertCategories = (categories: Category[]) => {
 
 const insertAppCategories = (appCategories: AppCategory[]) => {
   return (
-    `INSERT INTO ${APPS_CATEGORIES} (app_title) VALUES` +
+    `INSERT INTO ${APPS_CATEGORIES} (app_id,category_id) VALUES` +
     appCategories
       .map(
         (appCategory) =>
@@ -74,7 +75,7 @@ const insertAppCategories = (appCategories: AppCategory[]) => {
 
 const insertKeyBenefits = (keyBenefits: KeyBenefit[]) => {
   return (
-    `INSERT INTO ${KEY_BENEFITS} (description) VALUES` +
+    `INSERT INTO ${KEY_BENEFITS} (app_id,title,description) VALUES` +
     keyBenefits
       .map(
         (keyBenefit) =>
@@ -95,7 +96,9 @@ const insertPricingPlans = (pricingPlans: string[]) => {
 
 const insertReviews = (reviews: Review[]) => {
   return (
-    `INSERT INTO ${REVIEWS} (author) VALUES` +
+    `INSERT INTO ${REVIEWS} (app_id,author,body,
+      rating,helpful_count,date_created,
+      developer_reply,developer_reply_date) VALUES` +
     reviews
       .map(
         (review) => `(
@@ -117,7 +120,7 @@ const insertAppPricingPlans = (
   prices: PricingPlanPrice[]
 ) => {
   return (
-    `INSERT INTO ${APPS_PRICING_PLANS} (price) VALUES` +
+    `INSERT INTO ${APPS_PRICING_PLANS} (app_id,pricing_plan_id) VALUES` +
     pricingPlans
       .map(
         (pricingPlan) =>
@@ -278,7 +281,7 @@ describe("Insert Data", () => {
     async (done) => {
       const pricePlans = await ShopifyCsvLoader.pricingPlans();
       const prices = (await db.selectMultipleRows(
-        `SELECT * FROM ${APPS}`
+        `SELECT * FROM ${PRICING_PLANS}`
       )) as PricingPlanPrice[];
 
       const chunks = _.chunk(pricePlans, 500);
