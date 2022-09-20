@@ -52,7 +52,7 @@ describe("Queries Across Tables", () => {
       FROM pricing_plans
       JOIN apps_pricing_plans ON pricing_plans.id = apps_pricing_plans.pricing_plan_id
       WHERE casted_price BETWEEN 5 and 10
-      GROUP BY price
+      GROUP BY casted_price
       ORDER BY count DESC
       limit 3`;
       const result = await db.selectMultipleRows(query);
