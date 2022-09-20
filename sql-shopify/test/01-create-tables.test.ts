@@ -11,7 +11,6 @@ import {
 } from "../src/shopify-table-names";
 import { tableInfo, indexList } from "../src/queries/table-info";
 
-// id  NOT NULL
 const CREATE_APPS_TABLE = `CREATE TABLE ${APPS} (
     id integer NOT NULL Primary key,
     url text NOT NULL,
@@ -26,20 +25,17 @@ const CREATE_APPS_TABLE = `CREATE TABLE ${APPS} (
     pricing_hint text
 )`;
 
-//id notnull
 const CREATE_CATEGORIES_TABLE = `CREATE TABLE ${CATEGORIES} (
     id integer NOT NULL Primary key,
     title text NOT NULL
 )`;
 
-//app_id NOT NULL
 const CREATE_APPS_CATEGORIES_TABLE = `CREATE TABLE ${APPS_CATEGORIES} (
     app_id integer NOT NULL,
     category_id integer NOT NULL,
     Primary key(app_id, category_id)
 )`;
 
-// app_id and title not null
 const CREATE_KEY_BENEFITS_TABLE = `CREATE TABLE ${KEY_BENEFITS} (
     app_id integer NOT NULL,
     title text  NOT NULL,
@@ -47,21 +43,17 @@ const CREATE_KEY_BENEFITS_TABLE = `CREATE TABLE ${KEY_BENEFITS} (
     Primary key(app_id, title)
 )`;
 
-// price NOT NULL
 const CREATE_PRICING_PLANS_TABLE = `CREATE TABLE ${PRICING_PLANS} (
     id integer NOT NULL Primary key,
     price text NOT NULL
 )`;
 
-// both not null
 const CREATE_APPS_PRICING_PLANS_TABLE = `CREATE TABLE ${APPS_PRICING_PLANS} (
     app_id integer NOT NULL,
     pricing_plan_id integer NOT NULL,
     Primary key(app_id, pricing_plan_id)
 )`;
-/** 
 
- */
 const CREATE_REVIEWS_TABLE = `CREATE TABLE ${REVIEWS} (
     app_id integer NOT NULL,
     author text NOT NULL,

@@ -44,7 +44,17 @@ describe("Queries Across Tables", () => {
   it(
     "should select top 3 prices by appearance in apps and in price range from $5 to $10 inclusive (not matters monthly or one time payment)",
     async (done) => {
-      const query = `todo`;
+      const query = `SELECT COUNT(price) AS count, price,
+      CASE WHEN price LIKE '%month%'
+             THEN CAST(substr(substr(price, length(price)-5,-6),2) AS REAL)
+             ELSE CAST(substr(substr(price, length(price)-15,-16),2) AS REAL)
+             END AS casted_price
+      FROM pricing_plans
+      JOIN apps_pricing_plans ON pricing_plans.id = apps_pricing_plans.pricing_plan_id
+      WHERE casted_price BETWEEN 5 and 10
+      GROUP BY price
+      ORDER BY count DESC
+      limit 3`;
       const result = await db.selectMultipleRows(query);
       expect(result).toEqual([
         { count: 225, price: "$9.99/month", casted_price: 9.99 },
