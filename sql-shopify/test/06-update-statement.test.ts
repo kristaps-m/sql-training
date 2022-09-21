@@ -22,7 +22,7 @@ describe("Update Statements", () => {
       const query = `
         UPDATE ${APPS}
         SET title = 'QUICK VIEW'
-        WHERE id = 200`;
+        WHERE id = ${app.id}`;
       try {
         await db.execute(query);
       } catch (e) {
